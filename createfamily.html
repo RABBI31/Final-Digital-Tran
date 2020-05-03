@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Tran</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+ <header >
+     <div class="container">
+        <div id="branding">
+            <a class="e" href="index.html">Digital Tran</a>
+        </div>
+         <nav>
+             <ul>
+                 <li ><a href="index.html">Home</a></li>
+                 <li ><a href="login.html">Log In</a></li>
+                 <li ><a href="adminpage.html">Admin</a></li>
+                 <li class="current"><a href="stafflogin.html">Staff</a></li>
+                 
+             </ul>
+         </nav>
+     </div>
+
+ </header>
+ <section id="showc">
+    <div class="container">
+       
+            <div>
+                <h1>Family Address</h1>
+            </div>
+            <body>
+            <form name="myform" id="myForm">
+            Select State: <select name="state" id="countySel" size="1">
+            <option value="" selected="selected">Select State</option>
+            </select>
+            <br>
+            <br>
+            Select District: <select name="countrya" id="stateSel" size="1">
+            <option value="" selected="selected">Please select State first</option>
+            </select>
+            <br>
+            <br>
+            Select Thana: <select name="district" id="districtSel" size="1">
+            <option value="" selected="selected">Please select District first</option>
+            </select>
+            <br>
+            <br>
+            Select Warehouse no: <select name="ware" id="ware" size="1">
+                <option value="" selected="selected">Please select thana first</option>
+                </select>
+                <br>
+                    <br>
+            <a class="button"  href="family.html" >Submit</a>
+            </form>
+    </div>
+ </section>
+ <footer>
+    <footer>
+        <p>Digital Tran, Copyright &copy; 2020 </p>
+    </footer>
+</footer>
+<script>
+    var stateObject = {
+    "Dhaka": { "Gazipur": ["Tongi", "Beribad"]
+    },
+    "Chittagong": {
+    "Cox's bazar": ["Ramu", "Sea beach"],
+    
+    }, 
+    "Cumilla": {
+    "Cumilla Sadar": ["Rohmotpur", "Ishardi"]
+     },
+    }
+    window.onload = function () {
+    var countySel = document.getElementById("countySel"),
+    stateSel = document.getElementById("stateSel"),
+    districtSel = document.getElementById("districtSel");
+    ware = document.getElementById("ware");
+    for (var country in stateObject) {
+    countySel.options[countySel.options.length] = new Option(country, country);
+    }
+    countySel.onchange = function () {
+    stateSel.length = 1; // remove all options bar first
+    districtSel.length = 1; // remove all options bar first
+    ware.length=1;
+    if (this.selectedIndex < 1) return; // done
+    for (var state in stateObject[this.value]) {
+    stateSel.options[stateSel.options.length] = new Option(state, state);
+    }
+    }
+    countySel.onchange(); // reset in case page is reloaded
+    stateSel.onchange = function () {
+    districtSel.length = 1; // remove all options bar first
+    if (this.selectedIndex < 1) return; // done
+    var district = stateObject[countySel.value][this.value];
+    for (var i = 0; i < district.length; i++) {
+    districtSel.options[districtSel.options.length] = new Option(district[i], district[i]);
+    }
+    }
+    stateSel.onchange();
+    districtSel.onchange = function () {
+    ware.length = 1; // remove all options bar first
+    if (this.selectedIndex < 1) return; // done
+    var ware = stateObject[countySel.value][this.value];
+    for (var i = 0; i < ware.length; i++) {
+   ware.options[ware.options.length] = new Option(ware[i], ware[i]);
+    }
+    }
+    }
+</script>
+    
+</body>
+</html>
